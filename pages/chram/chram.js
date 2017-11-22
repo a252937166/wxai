@@ -77,7 +77,7 @@ Page( {
          img:res.tempFilePaths[ 0 ]
        })
         wx.uploadFile( {
-          url: 'http://127.0.0.1:9090/api/tencentDetectFace',
+          url: 'https://www.ouyanglol.com/wxapp/api/tencentDetectFace',
           filePath: res.tempFilePaths[ 0 ],
           header:{
              'content-type':'multipart/form-data'

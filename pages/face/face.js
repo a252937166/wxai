@@ -76,7 +76,7 @@ Page({
           img: res.tempFilePaths[0]
         })
         wx.uploadFile({
-          url: 'http://127.0.0.1:9090/api/baiDuFaceRecognize',
+          url: 'https://www.ouyanglol.com/wxapp/api/baiDuFaceRecognize',
           filePath: res.tempFilePaths[0],
           header: {
             'content-type': 'multipart/form-data'
