@@ -1,0 +1,51 @@
+{
+  "pages":[
+    "pages/nine/nine",
+    "pages/chram/chram",
+    "pages/face/face",
+    "pages/ocr/ocr",
+    "pages/dish/dish",
+    "pages/car/car",
+    "pages/plant/plant",
+    "pages/animal/animal",
+    "pages/subject/subject",
+    "pages/cardamage/cardamage",
+    "pages/object/object",
+    "pages/logo/logo",
+    "pages/resemble/resemble"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor":"#1BA0E1",
+    "navigationBarTitleText": "小程序",
+    "navigationBarTextStyle":"white"
+  },
+   "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#1BA0E1",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/chram/chram",
+      "iconPath": "image/icon_API.png",
+      "selectedIconPath": "image/icon_API_HL.png",
+      "text": "魅力值"
+    },{
+      "pagePath": "pages/face/face",
+      "iconPath": "image/Face.png",
+      "selectedIconPath": "image/Face_HL.png",
+      "text": "颜值打分"
+    },
+    {
+      "pagePath": "pages/nine/nine",
+      "iconPath": "image/image.png",
+      "selectedIconPath": "image/image_HL.png",
+      "text": "图像识别"
+    },{
+      "pagePath": "pages/ocr/ocr",
+      "iconPath": "image/OCR.png",
+      "selectedIconPath": "image/OCR_HL.png",
+      "text": "文字识别"
+    }]
+  }
+}
