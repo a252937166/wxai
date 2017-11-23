@@ -92,13 +92,26 @@ Page({
             var str=JSON.parse(data);
             console.log(str);
             if (str.success) {
+              var userInfo = getApp().globalData.userInfo;
               var result = JSON.parse(str.result)
               age = Math.ceil(result.age);
               beauty=Math.ceil(result.beauty);
-              remark = '你的颜值不如大队！';
-              if(getApp().globalData.userInfo.nickName=='Yisen') {
-                remark = '你的颜值和大队相当！';
+              userInfo.imageInfoId = result.imageInfoId;
+              remark = '你的颜值远远不如大队！';
+              if(userInfo.nickName=='Yisen') {
+                remark = '厉害了！你的颜值和大队相当！';
               }
+              wx.request( {  
+                url: "https://www.ouyanglol.com/wxapp/api/saveUserInfo",  
+                header: {
+                  'Content-Type': 'application/json;'
+                },
+                method: "POST", 
+                data:userInfo,
+                success: function(res) {
+                  console.log(res.data);
+                }
+              })
             } else{
               wx.showModal({
                 title: '来自大队的警告',

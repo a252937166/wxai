@@ -4,7 +4,7 @@
 }
 .container {
   margin-top: -50px;
-  background-image: url("https://www.xsshome.cn/timg.jpg");
+  background-image: url("https://qiniu.ouyanglol.com/wx_app/timg.jpg");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: bottom;
@@ -37,7 +37,7 @@ button {
   text-align: center;
   line-height: 75px;
   border-radius: 50%;
-  background-color: rgb(26, 160, 225);
+  background-color: #FFD700;
   margin-bottom: 20px;
 }
 

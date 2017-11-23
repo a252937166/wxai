@@ -90,7 +90,7 @@ Page({
           img: res.tempFilePaths[0]
         })
         wx.uploadFile({
-          url: 'http://127.0.0.1:9090/api/baiduDish',
+          url: 'https://www.ouyanglol.com/wxapp/api/baiduDish',
           filePath: res.tempFilePaths[0],
           header: {
             'content-type': 'multipart/form-data'
@@ -104,12 +104,26 @@ Page({
             var str=JSON.parse(data);
             console.log(str);
             if (str.success) {
-              var result = JSON.parse(str.result)
+              var result = JSON.parse(str.result);
+              var userInfo = getApp().globalData.userInfo;
               console.log(result);
+              console.log(userInfo)
               name = result.name;
               calorie = result.calorie;
               probability = (result.probability*100).toFixed(2)+"%";
-              words = 'success'
+              words = 'success';
+              userInfo.imageInfoId = result.imageInfoId;
+              wx.request( {  
+                url: "https://www.ouyanglol.com/wxapp/api/saveUserInfo",  
+                header: {
+                  'Content-Type': 'application/json;'
+                },
+                method: "POST", 
+                data:userInfo,
+                success: function(res) {
+                  console.log(res.data);
+                }
+              })
             } else{
               wx.showModal({
                 title: '来自大队的警告',

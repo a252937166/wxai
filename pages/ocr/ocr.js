@@ -1,4 +1,5 @@
 // pages/ocr/ocr.js
+var app = getApp();
 var ocrtext="";
 var bank_card_number;
 var bank_card_type;
@@ -99,8 +100,10 @@ Page({
         that.setData({
           img: res.tempFilePaths[0]
         })
+        var userInfo = getApp().globalData.userInfo;
+        console.log(userInfo);
         wx.uploadFile({
-          url: 'https://www.xsshome.cn/xcx/uploadBOCR',
+          url: 'http://127.0.0.1:9090/api/baiduOcr',
           //url:'http://192.168.10.241:9080/xcx/uploadBOCR',
           filePath: res.tempFilePaths[0],
           header: {
@@ -109,7 +112,8 @@ Page({
           name: 'file',
           formData: {
             'user': 'test',
-            'ocrtype': ocrindex
+            'ocrtype': ocrindex,
+            'nickName': userInfo.nickName
           },
           success: function (res) {
             console.info(res);
@@ -137,7 +141,7 @@ Page({
     return {
       title: 'OCR识别',
       path: '/pages/ocr/ocr',
-      imageUrl:'https://www.xsshome.cn/timg.jpg',
+      imageUrl:'https://qiniu.ouyanglol.com/wx_app/timg.jpg',
       success: function (res) {
         if (res.errMsg == 'shareAppMessage:ok') {
           wx.showToast({
@@ -161,8 +165,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function () {
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+    })
   },
 
   /**

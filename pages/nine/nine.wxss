@@ -1,7 +1,7 @@
 /* pages/ninegrid/ninegrid.wxss */
 .container {
   margin-top: -20px;
-  background-image: url("https://www.xsshome.cn/timg.jpg");
+  background-image: url("https://qiniu.ouyanglol.com/wx_app/timg.jpg");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: bottom;

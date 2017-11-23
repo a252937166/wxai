@@ -16,13 +16,13 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor":"#1BA0E1",
+    "navigationBarBackgroundColor":"#FFD700",
     "navigationBarTitleText": "小程序",
     "navigationBarTextStyle":"white"
   },
    "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#1BA0E1",
+    "selectedColor": "#FFD700",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [{
