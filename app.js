@@ -13,11 +13,23 @@ App({
     }else{
       //调用登录接口
       wx.login({
-        success: function () {
+        success: function (res) {
+          var code = res.code
           wx.getUserInfo({
             success: function (res) {
               that.globalData.userInfo = res.userInfo
               typeof cb == "function" && cb(that.globalData.userInfo)
+              wx.request({
+                url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxeadff8cfd42bc3a9&secret=08cb141033ff61196cddb284fac405a7&js_code='+ code +'&grant_type=authorization_code',
+                  data: {},
+                  header: {
+                      'content-type': 'application/json'
+                  },
+                  success: function(res) {
+                    console.log('code:'+code)
+                    that.globalData.userInfo.openid = res.data.openid //返回openid
+                  }
+               })
             }
           })
         }

@@ -50,5 +50,5 @@ button{
 }
 .user-remark{
   font-family: 微软雅黑;
-  margin-top: 65px;
+  margin-top: 10px;
 }

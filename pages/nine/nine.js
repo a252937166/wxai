@@ -65,6 +65,7 @@ Page({
   toPage: function (event) {
     console.info(event.currentTarget.id);
     var route = event.currentTarget.id;
+    console.log(getApp().globalData.userInfo)
     if (route == 0) {
       wx.navigateTo({
         url: '/pages/dish/dish',
@@ -83,7 +84,7 @@ Page({
       })
     } else if (route == 4) {
       wx.showModal({
-        title: '功能说明',
+        title: '温馨提示',
         content: '检测图像中的主体位置，没啥好玩的。就不开放了。',
         showCancel: false,
       })

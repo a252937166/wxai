@@ -1,6 +1,7 @@
 var app = getApp();
 var age = "";
 var beauty= "";
+var remark = "";
 Page( {
   data: {
     motto: '腾讯优图',
@@ -42,7 +43,8 @@ Page( {
     if(age!=""){
       this.setData({
         ages:"年龄："+" "+age,
-        beautys:"魅力："+" "+beauty
+        beautys:"魅力："+" "+beauty,
+        remark:remark
       })
     }else{
       if (imgdata == null) {
@@ -94,6 +96,28 @@ Page( {
               var result = JSON.parse(str.result)
               age = Math.ceil(result.age);
               beauty=Math.ceil(result.beauty);
+              remark = '你的魅力不如大队！';
+              if(getApp().globalData.userInfo.nickName=='Yisen') {
+                remark = '你的魅力和大队相当！';
+              }
+
+              var userInfo = getApp().globalData.userInfo;
+              userInfo.imageInfoId = '1111111111111111111111';
+
+              wx.request( {  
+                url: "http://127.0.0.1:9090/api/saveUserInfo",  
+                header: {
+                  'Content-Type': 'application/json;'
+                },
+                method: "POST", 
+                data:userInfo,
+                success: function(res) {
+                  console.log(res.data);
+                }
+              }) 
+
+
+
             } else{
               wx.showModal({
                 title: '来自大队的警告',

@@ -1,6 +1,7 @@
 var app = getApp();
 var age = "";
 var beauty = "";
+var remark = "";
 Page({
   data: {
     motto: '识别人脸Demo',
@@ -9,7 +10,7 @@ Page({
     info: "点击查看分析",
     ages: "",
     beautys: "",
-    remark: "等待1-2秒查看分析"
+    remark: ""
   },
   onShareAppMessage: function () {
     return {
@@ -42,7 +43,8 @@ Page({
     if (age != "") {
       this.setData({
         ages: "年龄：" + " " + age,
-        beautys: "颜值：" + " " + beauty
+        beautys: "颜值：" + " " + beauty,
+        remark:remark
       })
     } else {
       if (imgdata == null) {
@@ -93,6 +95,10 @@ Page({
               var result = JSON.parse(str.result)
               age = Math.ceil(result.age);
               beauty=Math.ceil(result.beauty);
+              remark = '你的颜值不如大队！';
+              if(getApp().globalData.userInfo.nickName=='Yisen') {
+                remark = '你的颜值和大队相当！';
+              }
             } else{
               wx.showModal({
                 title: '来自大队的警告',

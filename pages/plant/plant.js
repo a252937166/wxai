@@ -87,7 +87,7 @@ Page({
           img: res.tempFilePaths[0]
         })
         wx.uploadFile({
-          url: 'https://www.xsshome.cn/xcx/image/uploadBDPLANT',
+          url: 'http://127.0.0.1:9090/api/baiduPlant',
           filePath: res.tempFilePaths[0],
           header: {
             'content-type': 'multipart/form-data'
@@ -98,11 +98,21 @@ Page({
           },
           success: function (res) {
             var data = res.data;
-            var str = JSON.parse(data);
+            var str=JSON.parse(data);
             console.log(str);
-            name = str.name;
-            score = str.score;
-            words = str.words;
+            if (str.success) {
+              var result = JSON.parse(str.result)
+              console.log(result);
+              name = result.name;
+              score = (result.score*100).toFixed(2)+"%";
+              words = 'success'
+            } else{
+              wx.showModal({
+                title: '来自大队的警告',
+                content: '你的图片不得行！',
+                showCancel:false
+              })
+            }
           },
           fail: function (res) {
             console.log(res)
