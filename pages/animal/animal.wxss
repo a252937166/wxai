@@ -47,7 +47,7 @@ button {
 
 .user-names {
   font-family: 微软雅黑;
-  color: rgb(244,234,42);
+  color: rgb(97,70,49);
 }
 .user-calories{
  font-family: 微软雅黑;
@@ -55,7 +55,7 @@ button {
 }
 .user-probabilitys{
  font-family: 微软雅黑;
- color: rgb(244,234,42);
+ color: rgb(97,70,49);
 }
 .user-remark {
   font-family: 微软雅黑;

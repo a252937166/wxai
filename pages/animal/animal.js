@@ -62,7 +62,7 @@ Page({
           })
         } else {
           this.setData({
-            names: "不着急等待1-2秒再点击",
+            names: "大队正在疯狂识别中。。。\r\n请稍等后点击识别！",
           })
         }
       }
@@ -75,67 +75,58 @@ Page({
     })
   },
   uploads: function () {
-    var that = this
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        //console.log( res )
-        that.setData({
-          img: res.tempFilePaths[0]
-        })
-        wx.uploadFile({
-          url: 'https://www.ouyanglol.com/wxapp/api/baiduAnimal',
-          filePath: res.tempFilePaths[0],
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          name: 'file',
-          formData: {
-            'user': 'test'
-          },
-          success: function (res) {
-            var data = res.data;
-            var str=JSON.parse(data);
-            console.log(str);
-            if (str.success) {
-              var result = JSON.parse(str.result);
-              var userInfo = getApp().globalData.userInfo;
-              console.log(result);
-              name = result.name;
-              score = (result.score*100).toFixed(2)+"%";
-              userInfo.imageInfoId = result.imageInfoId;             
-              words = 'success';
-              wx.request( {  
-                url: "https://www.ouyanglol.com/wxapp/api/saveUserInfo",  
-                header: {
-                  'Content-Type': 'application/json;'
-                },
-                method: "POST", 
-                data:userInfo,
-                success: function(res) {
-                  console.log(res.data);
-                }
-              })
-            } else{
-              wx.showModal({
-                title: '来自大队的警告',
-                content: '你的图片不得行！',
-                showCancel:false
-              })
+    var that = this;
+    if (getApp().globalData.userInfo && getApp().globalData.userInfo.id) {
+      wx.chooseImage({
+        count: 1, // 默认9
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+          that.setData({
+            names: "大队正在疯狂识别中。。。\r\n请稍等后点击识别！",
+            score:""
+          })
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          that.setData({
+            img: res.tempFilePaths[0]
+          })
+          wx.uploadFile({
+            url: 'https://www.ouyanglol.com/wxapp/api/baiduAnimal',
+            filePath: res.tempFilePaths[0],
+            header: {
+              'content-type': 'multipart/form-data'
+            },
+            name: 'file',
+            formData: {
+              'userInfoId': getApp().globalData.userInfo.id
+            },
+            success: function (res) {
+              var data = res.data;
+              var str = JSON.parse(data);
+              if (str.success) {
+                var result = JSON.parse(str.result);
+                name = result.name;
+                score = (result.score * 100).toFixed(2) + "%";
+                words = 'success';
+              } else {
+                wx.showModal({
+                  title: '来自大队的警告',
+                  content: '你的图片不得行！',
+                  showCancel: false
+                })
+              }
+            },
+            fail: function (res) {
             }
-          },
-          fail: function (res) {
-            console.log(res)
-          }
-        })
-      }
-    })
+          })
+        }
+      });
+    } else {
+      //获取用户信息
+      app.getOpenSetting();
+    }
   },
   onLoad: function () {
-    console.log('onLoad')
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {

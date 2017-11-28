@@ -1,4 +1,5 @@
 // pages/ninegrid/ninegrid.js
+var app = getApp();
 Page({
 
   /**
@@ -56,16 +57,15 @@ Page({
       },
       {
         id: '8',
-        name: '相似相同图像搜索',
+        name: '相似图像搜索',
         url: '../../pages/resemble/resemble',
-        icon: '../../image/equal_Hl.png'
+        icon: '../../image/equal_HL.png'
       }
     ]
   },
   toPage: function (event) {
     console.info(event.currentTarget.id);
     var route = event.currentTarget.id;
-    console.log(getApp().globalData.userInfo)
     if (route == 0) {
       wx.navigateTo({
         url: '/pages/dish/dish',
@@ -105,7 +105,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.info(options)
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+    })
   },
 
   /**
@@ -133,7 +141,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
 
   /**

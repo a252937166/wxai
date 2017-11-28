@@ -62,7 +62,7 @@ Page({
           })
         } else {
           this.setData({
-            names: "不着急等待1-2秒再点击",
+            names: "大队正在疯狂识别中。。。\r\n请稍等后点击识别！",
           })
         }
       }
@@ -94,31 +94,17 @@ Page({
           },
           name: 'file',
           formData: {
-            'user': 'test'
+            'userInfoId':getApp().globalData.userInfo.id
           },
           success: function (res) {
           var data = res.data;
             var str=JSON.parse(data);
-            console.log(str);
             if (str.success) {
               var result = JSON.parse(str.result);
-              var userInfo = getApp().globalData.userInfo;
-              console.log(result);
+
               name = result.name;
               score = (result.probability*100).toFixed(2)+"%";
               words = 'success';
-              userInfo.imageInfoId = result.imageInfoId;
-              wx.request( {  
-                url: "https://www.ouyanglol.com/wxapp/api/saveUserInfo",  
-                header: {
-                  'Content-Type': 'application/json;'
-                },
-                method: "POST", 
-                data:userInfo,
-                success: function(res) {
-                  console.log(res.data);
-                }
-              })
             } else{
               wx.showModal({
                 title: '来自大队的警告',
