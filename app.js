@@ -8,11 +8,10 @@ App({
   },
   getUserInfo: function (cb) {
     var that = this
-    if (this.globalData.userInfo && this.globalData.userInfo.id) {
-      console.log(this.globalData.userInfo)
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    } else {
+    console.log('调用登陆接口。。。');
+    if (!(this.globalData.userInfo && this.globalData.userInfo.id)) {
       //调用登录接口
+      console.log('开始登陆。。。');
       wx.login({
         success: function (res) {
           var code = res.code
@@ -23,7 +22,7 @@ App({
               console.log('code:' + code)
               //储存用户访问信息
               wx.request({
-                url: 'https://www.ouyanglol.com/wxapp/api/saveUserInfo',
+                url: 'https://blog.ouyanglol.com/wxapp/api/saveUserInfo',
                 method: "POST",
                 data: that.globalData.userInfo,
                 header: {

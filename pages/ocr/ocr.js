@@ -108,7 +108,7 @@ Page({
               img: res.tempFilePaths[0]
             })
             wx.uploadFile({
-              url: 'https://www.ouyanglol.com/wxapp/api/baiduOcr',
+              url: 'https://blog.ouyanglol.com/wxapp/api/baiduOcr',
               //url:'http://192.168.10.241:9080/xcx/uploadBOCR',
               filePath: res.tempFilePaths[0],
               header: {

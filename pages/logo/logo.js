@@ -87,7 +87,7 @@ Page({
           img: res.tempFilePaths[0]
         })
         wx.uploadFile({
-          url: 'https://www.ouyanglol.com/wxapp/api/baiduLogo',
+          url: 'https://blog.ouyanglol.com/wxapp/api/baiduLogo',
           filePath: res.tempFilePaths[0],
           header: {
             'content-type': 'multipart/form-data'

@@ -85,7 +85,7 @@ Page({
             img: res.tempFilePaths[0]
           })
           wx.uploadFile({
-            url: 'https://www.ouyanglol.com/wxapp/api/tencentDetectFace',
+            url: 'https://blog.ouyanglol.com/wxapp/api/tencentDetectFace',
             filePath: res.tempFilePaths[0],
             header: {
               'content-type': 'multipart/form-data'
@@ -102,7 +102,7 @@ Page({
                 age = Math.ceil(result.age);
                 beauty = Math.ceil(result.beauty);
                 remark = '你的魅力远远不如大队！';
-                if (getApp().globalData.userInfo.nickName == 'Yisen') {
+                if (getApp().globalData.userInfo.openid == 'oLvAT0f2Nply1P8m48zYWAHOq33g') {
                   remark = '厉害了！你的魅力和大队相当！';
                 }
               } else {

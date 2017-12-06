@@ -88,7 +88,7 @@ Page({
             img: res.tempFilePaths[0]
           })
           wx.uploadFile({
-            url: 'https://www.ouyanglol.com/wxapp/api/baiduCar',
+            url: 'https://blog.ouyanglol.com/wxapp/api/baiduCar',
             filePath: res.tempFilePaths[0],
             header: {
               'content-type': 'multipart/form-data'
